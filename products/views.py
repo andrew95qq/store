@@ -15,7 +15,7 @@ def products(request):
     context = {
         'title': 'Store - Каталог',
         'products': Product.objects.all(),
-        'categories': ProductCategory.objects.filter(user=request.user),
+        'categories': ProductCategory.objects.all(),
     }
     return render(request, 'products/products.html', context)
 

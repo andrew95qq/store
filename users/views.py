@@ -47,7 +47,7 @@ def profile(request):
     context = {
         'title': 'Store - профиль',
         'form': form,
-        'baskets': Basket.objects.all(),
+        'baskets': Basket.objects.filter(user=request.user),
     }
     return render(request, 'users/profile.html', context)
 
