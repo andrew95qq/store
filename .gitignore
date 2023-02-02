@@ -1,2 +1,10 @@
 /db.sqlite3
 /media/
+.DS_Store
+__pycache__/
+common/__pycache__/
+products/__pycache__/
+products/migrations/__pycache__/
+store/__pycache__/
+users/__pycache__/
+users/migrations/__pycache__/
