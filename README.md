@@ -1,2 +1,2 @@
 # store
-My first git project.
+Django online store
