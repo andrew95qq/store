@@ -11,6 +11,7 @@ from django.conf import settings
 from common.views import TitleMixin
 from orders.forms import OrderForm
 
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -38,7 +39,7 @@ class OrderCreateView(TitleMixin, CreateView):
                     'quantity': 1,
                 },
             ],
-            metadata = {'order_id': self.object.id},
+            metadata={'order_id': self.object.id},
             mode='payment',
             success_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_success')),
             cancel_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_canceled')),
@@ -75,14 +76,15 @@ def stripe_webhook_view(request):
             expand=['line_items'],
         )
 
-        line_items = session.line_items
+        # line_items = session.line_items
         # Fulfill the purchase...
-        fulfill_order(line_items)
+        fulfill_order(session)
 
     # Passed signature verification
     return HttpResponse(status=200)
 
 
-def fulfill_order(line_items):
+def fulfill_order(session):
     # TODO: fill me in
+    order_id = int(session.metadata.order_id)
     print("Fulfilling order")
