@@ -1,8 +1,7 @@
 import stripe
-
+from django.conf import settings
 from django.db import models
 
-from django.conf import settings
 from users.models import User
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -80,3 +79,12 @@ class Basket(models.Model):
 
     def sum(self):
         return self.product.price * self.quantity
+
+    def de_json(self):
+        basket_item = {
+            'product_name': self.product.name,
+            'quantity': self.quantity,
+            'price': float(self.product.price),
+            'sum': float(self.sum()),
+        }
+        return basket_item
